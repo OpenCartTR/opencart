@@ -1,8 +1,10 @@
 <?php
 class ModelLocalisationReturnAction extends Model {
 	public function addReturnAction($data) {
+	    $return_action_id = 0;
+	    
 		foreach ($data['return_action'] as $language_id => $value) {
-			if (isset($return_action_id)) {
+		    if ($return_action_id != 0) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET return_action_id = '" . (int)$return_action_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
 			} else {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "return_action SET language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");

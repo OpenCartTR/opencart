@@ -27,8 +27,10 @@ class ModelCatalogRecurring extends Model {
 
 		$data['recurring_description'] = $this->getRecurringDescription($recurring_id);
 
-		foreach ($data['recurring_description'] as &$recurring_description) {
-			$recurring_description['name'] .= ' - 2';
+		$keys = array_keys($data['recurring_description']);
+		
+		foreach($keys as $key) {
+		    $data['recurring_description'][$key]['name'] .= ' - 2';
 		}
 
 		$this->addRecurring($data);

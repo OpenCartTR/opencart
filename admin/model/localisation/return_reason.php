@@ -1,8 +1,10 @@
 <?php
 class ModelLocalisationReturnReason extends Model {
 	public function addReturnReason($data) {
+	    $return_reason_id = 0;
+	    
 		foreach ($data['return_reason'] as $language_id => $value) {
-			if (isset($return_reason_id)) {
+		    if ($return_reason_id != 0) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "return_reason SET return_reason_id = '" . (int)$return_reason_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
 			} else {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "return_reason SET language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
