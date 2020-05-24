@@ -85,24 +85,11 @@ class Amazonus {
 	}
 
 	public function encryptArgs($data) {
-		$token = $this->openbay->pbkdf2($this->enc1, $this->enc2, 1000, 32);
-		$crypt = $this->openbay->encrypt($data, $token, true);
-
-		return $crypt;
+	    return $this->openbay->encrypt($data, $this->enc1, $this->enc2, true);
 	}
-
+	
 	public function decryptArgs($crypt, $is_base_64 = true) {
-		if ($is_base_64) {
-			$crypt = base64_decode($crypt, true);
-			if (!$crypt) {
-				return false;
-			}
-		}
-
-		$token = $this->openbay->pbkdf2($this->enc1, $this->enc2, 1000, 32);
-		$data = $this->openbay->decrypt($crypt, $token);
-
-		return $data;
+	    return $this->openbay->decrypt($crypt, $this->enc1, $this->enc2, $is_base_64);
 	}
 
 	public function getServer() {
